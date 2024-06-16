@@ -1,4 +1,4 @@
-#  Pair Matching Game - New Plannet
+#  Pair Matching - Menory Game - New Plannet
 
 **`--- Team Project ---`**
 
