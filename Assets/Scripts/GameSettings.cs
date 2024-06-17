@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameSettings : MonoBehaviour
 {
+    private readonly Dictionary<EPuzzleCategories, string> _tilesDirectory = new Dictionary<EPuzzleCategories, string>();
     private int _settings;
     private const int SettingsNumber = 2;
     public enum EPairNumber
@@ -44,8 +45,15 @@ public class GameSettings : MonoBehaviour
     }
     private void Start()
     {
+        SetTilesDirectory();
         _gameSettings = new Settings();
         ResetGameSettings();
+    }
+
+    private void SetTilesDirectory()
+    {
+        _tilesDirectory.Add(EPuzzleCategories.Tiles1, "Tiles1");
+        _tilesDirectory.Add(EPuzzleCategories.Tiles2, "Tiles2");
     }
 
     public void SetPairNumber(EPairNumber Number)
@@ -64,7 +72,7 @@ public class GameSettings : MonoBehaviour
         _gameSettings.PuzzleCategory = cat;
     }
 
-    public EPairNumber GetEPairNumber()
+    public EPairNumber GetPairNumber()
     {
         return _gameSettings.PairsNumber;
     }
@@ -84,5 +92,21 @@ public class GameSettings : MonoBehaviour
     public bool AllSettingsReady()
     {
         return _settings == SettingsNumber;
+    }
+    public string GetMaterialDirectoryName()
+    {
+        return "Materials/";
+    }
+    public string GetTilesCategoryTextureDirectoryName()
+    {
+        if(_tilesDirectory.ContainsKey(_gameSettings.PuzzleCategory))
+        {
+            return "Sprites/Tiles/" + _tilesDirectory[_gameSettings.PuzzleCategory] + "/";
+        }
+        else
+        {
+            Debug.LogError("ERROR: CANNOT GET DIRECTORY NAME");
+            return "";
+        }
     }
 }

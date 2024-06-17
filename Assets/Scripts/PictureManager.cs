@@ -14,10 +14,36 @@ public class PictureManager : MonoBehaviour
 
     private Vector2 _offset = new Vector2(2.6f, 2.5f); //Offset value to determine the distance between pictures in the grid
 
+    private List<Material> _materialList = new List<Material>();
+    private List<string> _texturePathList = new List<string>();
+    private Material _firstmaterial;
+    private string _firstTexturePath;
+
     void Start()
     {
+        LoadMaterials();
         SpawnPictureMesh(4, 5, StartPosition, _offset, false);
         MovePicture(4, 5, StartPosition, _offset);
+    }
+    private void LoadMaterials()
+    {
+        var materialFilePath = GameSettings.Instance.GetMaterialDirectoryName();
+        var textureFilePath = GameSettings.Instance.GetTilesCategoryTextureDirectoryName();
+        var pairNumber = (int)GameSettings.Instance.GetPairNumber();
+        const string matBaseName = "Pic";
+        var firstMaterialName = "Back";
+
+        for(var index = 1;  index <= pairNumber; index++)
+        {
+            var currentFilePath = materialFilePath + matBaseName + index;
+            Material mat = Resources.Load(currentFilePath, typeof(Material)) as Material;
+            _materialList.Add(mat);
+
+            var currentTextureFilePath = textureFilePath + matBaseName + index;
+            _texturePathList.Add(currentFilePath);
+        }
+        _firstTexturePath = textureFilePath + firstMaterialName;
+        _firstmaterial = Resources.Load(materialFilePath + firstMaterialName, typeof(Material)) as Material;
     }
 
 
@@ -36,6 +62,50 @@ public class PictureManager : MonoBehaviour
                 tempPicture.name = tempPicture.name + 'c' + col + 'r' + row;
                 PictureList.Add(tempPicture);
             }
+        }
+        ApplyTextures();
+    }
+    public void ApplyTextures()
+    {
+        var rndMatIndex = Random.Range(0, _materialList.Count);
+        var AppliedTimes = new int[_materialList.Count];
+
+        for(int i = 0; i < _materialList.Count; i++)
+        {
+            AppliedTimes[i] = 0;
+        }
+        foreach(var o in PictureList)
+        {
+            var randPrevious = rndMatIndex;
+            var counter = 0;
+            var forceMat = false;
+
+            while (AppliedTimes[rndMatIndex] >= 2 || ((randPrevious == rndMatIndex) && !forceMat))
+            {
+                rndMatIndex = Random.Range(0, _materialList.Count);
+                counter++;
+                if(counter > 100)
+                {
+                    for(var j = 0; j < _materialList.Count; j++)
+                    {
+                        if (AppliedTimes[j] < 2)
+                        {
+                            rndMatIndex = j;
+                            forceMat = true;
+                        }
+                    }
+                    if(forceMat == false)
+                        return;
+                }
+            }
+            o.SetFirstMaterial(_firstmaterial, _firstTexturePath);
+            o.ApplyFirstMaterial();
+            o.SetSecondMaterial(_materialList[rndMatIndex], _texturePathList[rndMatIndex]);
+
+ //           o.ApplySecondMaterial(); //test
+
+            AppliedTimes[rndMatIndex] += 1;
+            forceMat = false;
         }
     }
     private void MovePicture(int rows, int colums, Vector2 pos, Vector2 offset)
