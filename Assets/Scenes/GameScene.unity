@@ -454,7 +454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PictureClone: {fileID: 3453112905976123289, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
   PicSquawnPosition: {fileID: 114323146}
-  StartPosition: {x: -3.9, y: -4}
+  StartPosition: {x: 4, y: -6}
   PictureList: []
 --- !u!4 &1915179401
 Transform:
@@ -553,11 +553,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1338149977810847734, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.736
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1338149977810847734, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 1338149977810847734, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_LocalPosition.z

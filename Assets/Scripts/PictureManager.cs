@@ -6,13 +6,16 @@ public class PictureManager : MonoBehaviour
 {
     public Picture PictureClone; //Reference to the Picture prefab to be instantiated
     public Transform PicSquawnPosition; //Position where the pictures will initially be spawned
-    public Vector2 StartPosition = new Vector2(0f, 0f); // Starting position for the first picture
+    public Vector2 StartPosition = new Vector2(x:4f, y:-3f); // Starting position for the first picture
 
     //List to hold all the instantiated pictures
     [HideInInspector]
     public List<Picture> PictureList;
 
-    private Vector2 _offset = new Vector2(2.6f, 2.5f); //Offset value to determine the distance between pictures in the grid
+    private Vector2 _offset = new Vector2(x:-2.67f, y:2.9f);
+    private Vector2 _offsetFor15Pairs = new Vector2(x:-2f, y:2.3f);
+    private Vector2 _offsetFor20Pairs = new Vector2(x:-2f, y:1.75f);
+    private Vector3 _newScaleDown = new Vector3(x:1.5f, y:1.5f, z:0.001f);
 
     private List<Material> _materialList = new List<Material>();
     private List<string> _texturePathList = new List<string>();
@@ -22,8 +25,22 @@ public class PictureManager : MonoBehaviour
     void Start()
     {
         LoadMaterials();
-        SpawnPictureMesh(4, 5, StartPosition, _offset, false);
-        MovePicture(4, 5, StartPosition, _offset);
+
+        if(GameSettings.Instance.GetPairNumber() == GameSettings.EPairNumber.E10Pairs)
+        {
+            SpawnPictureMesh(rows: 4, colums: 5, Pos: StartPosition, _offset, scaleDown: false);
+            MovePicture(rows: 4, colums: 5, pos: StartPosition, _offset);
+        }
+        else if (GameSettings.Instance.GetPairNumber() == GameSettings.EPairNumber.E15Pairs)
+        {
+            SpawnPictureMesh(rows: 5, colums: 6, Pos: StartPosition, _offset, scaleDown: false);
+            MovePicture(rows: 5, colums: 6, pos: StartPosition, _offsetFor15Pairs);
+        }
+        else if (GameSettings.Instance.GetPairNumber() == GameSettings.EPairNumber.E20Pairs)
+        {
+            SpawnPictureMesh(rows: 5, colums: 8, Pos: StartPosition, _offset, scaleDown: true);
+            MovePicture(rows: 5, colums: 8, pos: StartPosition, _offsetFor20Pairs);
+        }
     }
     private void LoadMaterials()
     {
@@ -58,6 +75,11 @@ public class PictureManager : MonoBehaviour
             for (int row = 0; row < rows; row++)
             {
                 var tempPicture = (Picture)Instantiate(PictureClone, PicSquawnPosition.position, PictureClone.transform.rotation);
+
+                if(scaleDown)
+                {
+                    tempPicture.transform.localScale = _newScaleDown;
+                }
 
                 tempPicture.name = tempPicture.name + 'c' + col + 'r' + row;
                 PictureList.Add(tempPicture);
