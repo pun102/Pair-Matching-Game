@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameSettings : MonoBehaviour
 {
-    private readonly Dictionary<EPuzzleCategories, string> _tilesDirectory = new Dictionary<EPuzzleCategories, string>();
+    private readonly Dictionary<EPuzzleCategories, string> _puzzleGameDirectory = new Dictionary<EPuzzleCategories, string>();
     private int _settings;
     private const int SettingsNumber = 2;
     public enum EPairNumber
@@ -18,8 +18,8 @@ public class GameSettings : MonoBehaviour
     public enum EPuzzleCategories
     {
         NotSet,
-        Tiles1,
-        Tiles2,
+        PuzzleOne,
+        PuzzleTwo
     }
     public struct Settings
     {
@@ -45,15 +45,15 @@ public class GameSettings : MonoBehaviour
     }
     private void Start()
     {
-        SetTilesDirectory();
+        SetPuzzleGameDirectory();
         _gameSettings = new Settings();
         ResetGameSettings();
     }
 
-    private void SetTilesDirectory()
+    private void SetPuzzleGameDirectory()
     {
-        _tilesDirectory.Add(EPuzzleCategories.Tiles1, "Tiles1");
-        _tilesDirectory.Add(EPuzzleCategories.Tiles2, "Tiles2");
+        _puzzleGameDirectory.Add(EPuzzleCategories.PuzzleOne, "PuzzleOne");
+        _puzzleGameDirectory.Add(EPuzzleCategories.PuzzleTwo, "PuzzleTwo");
     }
 
     public void SetPairNumber(EPairNumber Number)
@@ -97,11 +97,11 @@ public class GameSettings : MonoBehaviour
     {
         return "Materials/";
     }
-    public string GetTilesCategoryTextureDirectoryName()
+    public string GetPuzzleCategoryTextureDirectoryName()
     {
-        if(_tilesDirectory.ContainsKey(_gameSettings.PuzzleCategory))
+        if(_puzzleGameDirectory.ContainsKey(_gameSettings.PuzzleCategory))
         {
-            return "Sprites/Tiles/" + _tilesDirectory[_gameSettings.PuzzleCategory] + "/";
+            return "Sprites/PuzzleGame/" + _puzzleGameDirectory[_gameSettings.PuzzleCategory] + "/";
         }
         else
         {

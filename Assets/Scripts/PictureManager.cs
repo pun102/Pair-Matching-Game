@@ -16,7 +16,7 @@ public class PictureManager : MonoBehaviour
 
     private List<Material> _materialList = new List<Material>();
     private List<string> _texturePathList = new List<string>();
-    private Material _firstmaterial;
+    private Material _firstMaterial;
     private string _firstTexturePath;
 
     void Start()
@@ -28,7 +28,7 @@ public class PictureManager : MonoBehaviour
     private void LoadMaterials()
     {
         var materialFilePath = GameSettings.Instance.GetMaterialDirectoryName();
-        var textureFilePath = GameSettings.Instance.GetTilesCategoryTextureDirectoryName();
+        var textureFilePath = GameSettings.Instance.GetPuzzleCategoryTextureDirectoryName();
         var pairNumber = (int)GameSettings.Instance.GetPairNumber();
         const string matBaseName = "Pic";
         var firstMaterialName = "Back";
@@ -40,10 +40,10 @@ public class PictureManager : MonoBehaviour
             _materialList.Add(mat);
 
             var currentTextureFilePath = textureFilePath + matBaseName + index;
-            _texturePathList.Add(currentFilePath);
+            _texturePathList.Add(currentTextureFilePath);
         }
         _firstTexturePath = textureFilePath + firstMaterialName;
-        _firstmaterial = Resources.Load(materialFilePath + firstMaterialName, typeof(Material)) as Material;
+        _firstMaterial = Resources.Load(materialFilePath + firstMaterialName, typeof(Material)) as Material;
     }
 
 
@@ -57,7 +57,7 @@ public class PictureManager : MonoBehaviour
         {
             for (int row = 0; row < rows; row++)
             {
-                var tempPicture = (Picture)Instantiate(PictureClone, PicSquawnPosition.position, PicSquawnPosition.transform.rotation);
+                var tempPicture = (Picture)Instantiate(PictureClone, PicSquawnPosition.position, PictureClone.transform.rotation);
 
                 tempPicture.name = tempPicture.name + 'c' + col + 'r' + row;
                 PictureList.Add(tempPicture);
@@ -98,11 +98,11 @@ public class PictureManager : MonoBehaviour
                         return;
                 }
             }
-            o.SetFirstMaterial(_firstmaterial, _firstTexturePath);
+            o.SetFirstMaterial(_firstMaterial, _firstTexturePath);
             o.ApplyFirstMaterial();
             o.SetSecondMaterial(_materialList[rndMatIndex], _texturePathList[rndMatIndex]);
 
- //           o.ApplySecondMaterial(); //test
+//            o.ApplySecondMaterial(); //test
 
             AppliedTimes[rndMatIndex] += 1;
             forceMat = false;

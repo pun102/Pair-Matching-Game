@@ -388,7 +388,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 20
+  near clip plane: 0
   far clip plane: 100
   field of view: 60
   orthographic: 1
@@ -553,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1338149977810847734, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.736
       objectReference: {fileID: 0}
     - target: {fileID: 1338149977810847734, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_LocalPosition.y
@@ -565,7 +565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1338149977810847734, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1338149977810847734, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_LocalRotation.x
@@ -577,7 +577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1338149977810847734, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1338149977810847734, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -589,13 +589,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1338149977810847734, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3453112905976123289, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4707231642812187052, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707231642812187052, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707231642812187052, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
+      propertyPath: BypassEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707231642812187052, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707231642812187052, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
+      propertyPath: BypassReverbZones
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4882247781204202271, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -611,6 +631,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 7139837747114753003, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
+      propertyPath: m_ImplicitCom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139837747114753003, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
+      propertyPath: m_ImplicitTensor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8192967410240728282, guid: bebd5a09351ba2c4b96d3751bb405b76, type: 3}
       propertyPath: m_Name
       value: PictureClone
